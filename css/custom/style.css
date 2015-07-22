@@ -1,0 +1,24 @@
+#tank {
+	height: 70px;
+	width: 70px;
+	position: absolute;
+	background-image: url("../../images/tank.png");
+	background-repeat: no-repeat;
+	border: 1px solid #000;
+}
+
+.tankLeft {
+	background-position: -167px -9px;
+}
+
+.tankRight {
+	background-position: -7px -9px;
+} 
+
+.tankDown {
+	background-position: -88px -9px;
+}
+
+.tankUp {
+	background-position: -248px -9px;
+}
