@@ -1,24 +1,17 @@
-function left () {
-	//console.log("left pressed");
-	$('#tank').removeClass().addClass("tankLeft");
-}
+$(function(){
+	var gTank = new tank($('#tank'));
+	var cx = (new cxge()).getEngine();
 
-function right () {
-	$('#tank').removeClass().addClass("tankRight");
-}
+	//left key pressed
+	cx.notifyOnKey(37, gTank.faceLeft);
+	cx.notifyOnKey(37, gTank.moveLeft);
 
-function up () {
-	$('#tank').removeClass().addClass("tankUp");
-}
+	//right key pressed
+	cx.notifyOnKey(39, gTank.faceRight);
+	cx.notifyOnKey(39, gTank.moveRight);
+})
 
-function down () {
-	$('#tank').removeClass().addClass("tankDown");
-}
 
-var cx = (new cxge()).getEngine();
-cx.notifyOnKey(37, left);
-cx.notifyOnKey(38, up);
-cx.notifyOnKey(39, right);
-cx.notifyOnKey(40, down);
+
 
 

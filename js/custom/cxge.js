@@ -17,7 +17,7 @@ function cxge () {
 		};
 
 		function bindKeyPressEvent(){
-			$(document).on('keyup', function(ev){
+			$(document).on('keydown', function(ev){
 				//loop thru all listener object and call all listening callback functions
 				for(var key in keyPressListener) {
 					if(ev.keyCode == key) {
