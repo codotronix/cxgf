@@ -6,35 +6,55 @@ function tank (element) {
 		return el;
 	};
 
-	this.faceLeft = function () {
+	var faceLeft = function () {
 		el.removeClass().addClass("tankLeft");
 	};
 
-	this.faceRight = function () {
+	var faceRight = function () {
 		el.removeClass().addClass("tankRight");
 	};
 
-	this.faceUp = function () {
+	var faceUp = function () {
 		el.removeClass().addClass("tankUp");
 	};
 
-	this.faceDown = function () {
+	var faceDown = function () {
 		el.removeClass().addClass("tankDown");
 	};
 
-	this.moveLeft = function() { 
+	this.moveLeft = function() {
+		faceLeft();
 		var left = getLeft();
 		if(left > 0) {
 			setLeft(left - speed);
 		}
 	};
 
-	this.moveRight = function() { 
+	this.moveRight = function() {
+		faceRight();
 		var left = getLeft(); 
 		if(left < 930) {
 			setLeft(left + speed);
 		}
 	}
+
+	this.moveUp = function() {
+		faceUp();
+		var top = getTop(); 
+		if(top > 0) {
+			setTop(top - speed);
+		}
+	}
+
+	this.moveDown = function() {
+		faceDown();
+		var top = getTop(); 
+		if(top < 530) {
+			setTop(top + speed);
+		}
+	}
+
+
 
 	function getLeft () {
 		var left = parseInt(el.css('left'));
