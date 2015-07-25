@@ -11,8 +11,8 @@ app.service('servc_cxge', function () {
 				keyPressListener[key] = [];
 			}
 			keyPressListener[key].push(callback);
-			console.log('pushing callback function');
-			console.log(callback);
+			//console.log('pushing callback function');
+			//console.log(callback);
 		};
 
 		function init () {
@@ -20,7 +20,7 @@ app.service('servc_cxge', function () {
 		};
 
 		function bindKeyPressEvent(){
-			$(document).on('keydown', function(ev){
+			angular.element(document).on('keydown', function(ev){
 				//loop thru all listener object and call all listening callback functions
 				for(var key in keyPressListener) {
 					if(ev.keyCode == key) {
