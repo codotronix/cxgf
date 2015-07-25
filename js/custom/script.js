@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 	var gTank = new tank($('#tank'));
 	var cx = (new cxge()).getEngine();
 
@@ -13,7 +13,9 @@ $(function(){
 
 	//down key pressed
 	cx.notifyOnKey(40, gTank.moveDown);
-})
+})*/
+
+
 
 
 
