@@ -44,6 +44,9 @@ app.controller("tankCtrl", ['$scope', 'servc_cxge', function ($scope, cxge) {
 	$scope.tank.moveDown = function () {
 		$scope.tank.direction = "tankDown";
 		$scope.tank.top += tank.speed;
+		//console.log($scope.tank.top);
+		//console.log($scope.field.height);
+		//console.log(tank.size);
 		if($scope.tank.top > ($scope.field.height - tank.size)) {
 			$scope.tank.top = $scope.field.height - tank.size;
 		}
@@ -62,10 +65,11 @@ app.controller("tankCtrl", ['$scope', 'servc_cxge', function ($scope, cxge) {
 	
 }]);
 
-app.controller("mainCtrl", ['$scope', function ($scope) {
+app.controller("mainCtrl", ['$scope','servc_cxge', function ($scope, cxge) {
 	$scope.field = {};
-	$scope.field.width = parseInt(angular.element(document.querySelector('#battleField')).css('width'));
-	$scope.field.height = parseInt(angular.element(document.querySelector('#battleField')).css('height'));
+	$scope.field.width = cxge.getScreenWidth();
+	$scope.field.height = cxge.getScreenHeight();
+	//console.log($scope.field.height);
 }]);
 
 

@@ -34,6 +34,14 @@ app.service('servc_cxge', function () {
 
 		init();
 	}
+
+	this.getScreenHeight = function(){
+		return(parseInt($(window).innerHeight()));
+	};
+
+	this.getScreenWidth = function(){
+		return(parseInt($(window).innerWidth()));
+	};
 	
 	this.getEngine = function(){
 		if(cxge == undefined) {
