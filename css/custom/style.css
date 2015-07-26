@@ -6,28 +6,28 @@
 }
 
 #tank {
-	height: 70px;
-	width: 70px;
+	height: 65px;
+	width: 65px;
 	top: 0;
 	left: 0;
 	position: absolute;
-	background-image: url("../../images/tank.png");
+	background-image: url("../../images/playerTank.png");
 	background-repeat: no-repeat;
-	border: 1px solid #000;
+	/*border: 1px solid #000;*/
 }
 
 .tankLeft {
-	background-position: -167px -9px;
+	background-position: -69px -1px;
 }
 
 .tankRight {
-	background-position: -7px -9px;
+	background-position: -1px -1px;
 } 
 
 .tankDown {
-	background-position: -88px -9px;
+	background-position: -143px -1px;
 }
 
 .tankUp {
-	background-position: -248px -9px;
+	background-position: -213px 0px;
 }

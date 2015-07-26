@@ -19,7 +19,7 @@ app.service('servc_cxge', function () {
 			bindKeyPressEvent();
 		};
 
-		function bindKeyPressEvent(){
+		function bindKeyPressEvent() {
 			angular.element(document).on('keydown', function(ev){
 				//loop thru all listener object and call all listening callback functions
 				for(var key in keyPressListener) {
