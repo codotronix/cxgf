@@ -1,6 +1,6 @@
 var app = angular.module("MainApp");
 
-app.service('servc_cxge', function () {
+app.service('servc_cxge', ['$timeout', function ($timeout) {
 	var cxge;	
 	function GameEngine () {
 		var gameObj = [];
@@ -49,4 +49,4 @@ app.service('servc_cxge', function () {
 		}		
 		return cxge;
 	};
-})
+}])

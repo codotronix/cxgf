@@ -32,3 +32,30 @@
 .tankUp {
 	background-position: -213px 0px;
 }
+
+.enemyTank {
+	background-image: url("../../images/tank.png");
+	background-repeat: no-repeat;
+	height: 70px;
+	width: 70px;
+	overflow: hidden;
+	display: inline-block;
+	position: absolute;
+}
+
+.enemyTankLeft {
+	background-position: -167px -8px;
+}
+
+.enemyTankRight {
+	background-position: -7px -8px;
+}
+
+.enemyTankUp {
+	background-position: -247px -8px;
+}
+
+.enemyTankDown {
+	background-position: -87px -8px;
+}
+

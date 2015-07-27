@@ -22,8 +22,15 @@
 	<body>
 		<div id="battleField" data-ng-controller="mainCtrl" style="height:{{field.height}}px;width:{{field.width}}px;">
 
+			<!-- The Player Tank -->
 			<div id="tank" data-ng-controller="tankCtrl" class="{{tank.direction}}" style="top:{{tank.top}}px;left:{{tank.left}}px;"></div>	
 
+			<!-- The Enemy Tanks -->
+			<enemy-tank tank-id="1"></enemy-tank>
+			<enemy-tank tank-id="2"></enemy-tank>
+			<enemy-tank tank-id="3"></enemy-tank>
+			<enemy-tank tank-id="4"></enemy-tank>
+			<enemy-tank tank-id="5"></enemy-tank>
 		</div>			
 	</body>
 </html>
