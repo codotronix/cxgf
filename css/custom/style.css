@@ -59,3 +59,28 @@
 	background-position: -87px -8px;
 }
 
+.enemyBullet {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	background: red;
+	border-radius: 50%;
+	border: 2px solid aliceblue;
+	box-sizing: border-box;
+	-webkit-animation: bulletGlow .5s linear infinite; /* Chrome, Safari, Opera */
+    animation: bulletGlow .5s linear infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes bulletGlow {
+	33% {background-color: yellow;}
+	66% {background-color: orange;}
+	100% {background-color: red;}
+}
+
+/* Standard syntax */
+@keyframes bulletGlow {
+	33% {background-color: yellow;}
+	66% {background-color: orange;}
+	100% {background-color: red;}
+}
