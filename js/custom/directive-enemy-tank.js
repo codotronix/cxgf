@@ -101,9 +101,24 @@ app.directive("enemyTank", function ($interval, servc_cxge) {
 				if(!$scope.bulletAlive) {
 					var rand = Math.floor(Math.random() * 99);
 					if(rand % 2 == 0) {
-						$scope.bulletTop = $scope.top + size / 2 - bullet.size/2;
-						$scope.bulletLeft = $scope.left + size / 2  - bullet.size/2;
 						bullet.direction = $scope.direction;
+						if(bullet.direction == 'Up') {
+							$scope.bulletTop = $scope.top - bullet.size/2;
+							$scope.bulletLeft = $scope.left + size / 2  - bullet.size/2;
+						} else if (bullet.direction == 'Down') {
+							$scope.bulletTop = $scope.top + size + bullet.size/2;
+							$scope.bulletLeft = $scope.left + size / 2  - bullet.size/2;
+						} else if (bullet.direction == 'Left') {
+							$scope.bulletTop = $scope.top + size / 2  - bullet.size/2;
+							$scope.bulletLeft = $scope.left - bullet.size/2;
+						} else if (bullet.direction == 'Right') {
+							$scope.bulletTop = $scope.top + size / 2  - bullet.size/2;
+							$scope.bulletLeft = $scope.left + size + bullet.size/2;
+						}
+
+						//$scope.bulletTop = $scope.top + size / 2 - bullet.size/2;
+						//$scope.bulletLeft = $scope.left + size / 2  - bullet.size/2;
+						
 						$scope.bulletAlive = true;
 					}
 				}				

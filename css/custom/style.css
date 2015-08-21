@@ -65,7 +65,7 @@
 	position: absolute;
 	background: red;
 	border-radius: 50%;
-	border: 2px solid aliceblue;
+	border: 2px solid white;
 	box-sizing: border-box;
 	-webkit-animation: bulletGlow .5s linear infinite; /* Chrome, Safari, Opera */
     animation: bulletGlow .5s linear infinite;
