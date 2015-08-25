@@ -125,7 +125,7 @@ app.directive("enemyTank", function ($interval, servc_cxge) {
 			}
 
 			$interval(move, 100);
-			$interval(fireBullet, 1000);
+			$interval(fireBullet, 500);
 		},
 		/*
 		link: function(scope, element, attrs, controllers) {			
