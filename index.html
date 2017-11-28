@@ -1,40 +1,15 @@
 <!DOCTYPE html>
-<html data-ng-app="MainApp">
+<html>
 	<head>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Basic App</title>
-		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/custom/style.css">	
-		<script src="js/lib/jquery-1.10.2.min.js"></script>
-		<script src="js/lib/angular.min.js"></script>
-		<script src="js/custom/app.js"></script>
-		<script src="js/custom/servc_cxge.js"></script>
-		<script src="js/custom/directive-enemy-tank.js"></script>
-		<script src="js/custom/ctrl_tankCtrl.js"></script>
-		
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	    <!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
+		<title>Codotronix Game Framework</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<div id="battleField" data-ng-controller="mainCtrl" style="height:{{field.height}}px;width:{{field.width}}px;">
+		
 
-			<!-- The Player Tank -->
-			<div id="tank" data-ng-controller="tankCtrl" class="{{tank.direction}}" style="top:{{tank.top}}px;left:{{tank.left}}px;"></div>
-
-			<!-- Player Bullet -->
-
-			<!-- The Enemy Tanks -->
-			<enemy-tank tank-id="1"></enemy-tank>
-			<enemy-tank tank-id="2"></enemy-tank>
-			<enemy-tank tank-id="3"></enemy-tank>
-			<enemy-tank tank-id="4"></enemy-tank>
-			<enemy-tank tank-id="5"></enemy-tank>
-		</div>			
+		<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript" src="js/custom/cxgf.js"></script>
 	</body>
 </html>
