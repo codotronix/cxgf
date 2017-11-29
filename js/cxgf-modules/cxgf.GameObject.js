@@ -2,9 +2,11 @@
 
     /*
     *   GameObjectConfig = {
-    *       x:
-            y:
+            x: position_X
+            y: position_Y
             speed:
+            speedX: speedX || speed
+            speedY: speedY || speed
             htmlId:
     *   }
     */
@@ -12,10 +14,6 @@
     window.cxgf.GameObject = (function () {
 
         function GameObject(GameObjectConfig) {
-            // this.x = x;
-            // this.y = y;
-            // this.htmlId = htmlId;
-
             for(var key in GameObjectConfig) {
                 this[key] = GameObjectConfig[key];
             }
@@ -31,22 +29,22 @@
         };
 
         GameObject.prototype.moveLeft = function () {
-            this.x -= this.speed;
+            this.x -= (this.speedX || this.speed);
             this.render();
         };
 
         GameObject.prototype.moveRight = function () {
-            this.x += this.speed;
+            this.x += (this.speedX || this.speed);
             this.render();
         };
 
         GameObject.prototype.moveUp = function () {
-            this.y -= this.speed;
+            this.y -= (this.speedY || this.speed);
             this.render();
         };
 
         GameObject.prototype.moveDown = function () {
-            this.y += this.speed;
+            this.y += (this.speedY || this.speed);
             this.render();
         };
 
