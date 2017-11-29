@@ -1,0 +1,18 @@
+.demo-box-container {
+	position: relative;
+	height: 150px;
+	border: 1px inset #ccc;
+	overflow: hidden;
+}
+
+.floating-box {
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	top: 100px;
+	left: 50px;
+}
+
+.blue {
+	background: #00f;
+}
