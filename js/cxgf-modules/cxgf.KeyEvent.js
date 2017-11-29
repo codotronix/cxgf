@@ -20,11 +20,14 @@
         bindKeyPressEvent();
     }
 
-    function onKeyPress (key, callbackFn) {
+    function onKeyPress (key, callbackFn, obj) {
         if(_keyPressListeners[key] == undefined) {
             _keyPressListeners[key] = [];
         }
-        _keyPressListeners[key].push(callbackFn);
+        _keyPressListeners[key].push({
+            fn: callbackFn,
+            obj: obj
+        });
     }
 
 
@@ -35,7 +38,7 @@
             for(var key in _keyPressListeners) {
                 if(ev.keyCode == key) {
                     for(var i in _keyPressListeners[key]) {
-                        _keyPressListeners[key][i]();
+                        _keyPressListeners[key][i].fn.apply(_keyPressListeners[key][i].obj);
                     }
                 }
             }

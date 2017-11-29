@@ -9,10 +9,12 @@
 	position: absolute;
 	height: 50px;
 	width: 50px;
-	top: 100px;
-	left: 50px;
 }
 
 .blue {
 	background: #00f;
+}
+
+.red {
+	background: #f00;
 }
