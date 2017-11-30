@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+#game-arena {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: cornflowerblue;
+}
+
+.boundary {
+    position: absolute;
+    background: #000;
+}
+
+.top-boundary,
+.bottom-boundary {
+    height: 3px;
+    left: 0;
+    right: 0;
+}
+
+.left-boundary,
+.right-boundary {
+    width: 3px;
+    top: 0;
+    bottom: 0;
+}
+
+.top-boundary {
+    top: 0;
+}
+
+.bottom-boundary {
+    bottom: 0;
+}
+
+.left-boundary {
+    left: 0;
+}
+
+.right-boundary {
+    right: 0;
+}
+
+.ball {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: red;
+    position: absolute;
+}

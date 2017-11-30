@@ -5,6 +5,10 @@
 	overflow: hidden;
 }
 
+.margin-top-15 {
+	margin-top: 15px;
+}
+
 .floating-box {
 	position: absolute;
 	height: 50px;
@@ -17,4 +21,8 @@
 
 .red {
 	background: #f00;
+}
+
+.orange {
+	background: orange;
 }
