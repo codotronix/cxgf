@@ -9,23 +9,35 @@
             speedY: speedY || speed
             htmlId:
 
-            
-            //directionSense can be either 4 or 8
-            //directionSense = 4, means it can go [E,W,N,S]
-            //directionSense = 8, means it can go [E,W,N,S,NE,NW,SE,SW]
-            //Used f auortomated random movement
-            //default is 4
-            directionSense:
+                // The property holdDirectionNTurns will be used for
+                // random moves only. It indicates after how many turns or ticks
+                // the direction should be randomized again
+                // default is 10
+            holdDirectionNTurns: 
+
+
+
 
     *   }
     */
 
     window.cxgf.GameObject = (function () {
 
-        function GameObject(GameObjectConfig) {
-            for(var key in GameObjectConfig) {
-                this[key] = GameObjectConfig[key];
+        function GameObject(gameObjectConfig) {
+
+            //Blindly copy all the properties
+            for(var key in gameObjectConfig) {
+                this[key] = gameObjectConfig[key];
             }
+
+            //Now set some defaults
+            this.x = this.x || 0;
+            this.y = this.y || 0;
+            this.speed = this.speed || 1;
+            this.speedX = this.speedX || this.speed;
+            this.speedY = this.speedY || this.speed;
+            this.directionSense = this.directionSense || 4;
+            this.holdDirectionNTurns = this.holdDirectionNTurns || 9;
 
             this.render();
         }
@@ -58,24 +70,21 @@
         };
 
         GameObject.prototype.move = function (direction) {
-            if (direction === 'left') {
+            if (direction === 'LEFT' || direction === 'W') {
                 this.moveLeft();
             }
-            else if (direction === 'right') {
+            else if (direction === 'RIGHT' || direction === 'E') {
                 this.moveRight();
             }
-            else if (direction === 'up') {
+            else if (direction === 'UP' || direction === 'N') {
                 this.moveUp();
             }
-            else if (direction === 'down') {
+            else if (direction === 'down' || direction === 'S') {
                 this.moveDown();
             }
-            else if (direction === 'random' || direction === undefined) {
-
-                //If this.directionSense is 4, means can go to all 4 directions
-                //Also if directionSense is undefined, default to directionSense=4 
-                if (this.directionSense === 4 || this.directionSense === undefined) {
-                    
+            else if (direction === 'RANDOM-4' || direction === undefined) {
+                 
+                if(!this._holdDirectionCounter || this._holdDirectionCounter > this.holdDirectionNTurns) {
                     //First, calculate the possible directions
                     //Then randomly pick 1 among the possibilities
                     //to stop shaking behavior, restrict movement direction
@@ -96,27 +105,32 @@
                       this.direction = ['E','W','N','S'][Math.floor(Math.random() * 4)];
                     }
                     
-                    
-                    if (this.direction === 'N') { this.moveUp(); }
-                    else if (this.direction === 'E') { this.moveRight(); }
-                    else if (this.direction === 'S') { this.moveDown(); }
-                    else if (this.direction === 'W') { this.moveLeft(); }
-                    
                     this.prevDirection = this.direction;
-
+                    this._holdDirectionCounter = 0;
                 }
-                else if (this.directionSense === 8) {
-                    //TODO: implement movement for 8 directional things
-                }               
                 
+                this._holdDirectionCounter++;                
+                this.move(this.direction);
             }
+        };
+
+        GameObject.prototype.turnAround = function () {
+            var oppositeDirections = {
+                'E': 'W',
+                'W': 'E',
+                'N': 'S',
+                'S': 'N'
+            };
+
+            this.direction = oppositeDirections[this.direction];
+            this.move(this.direction);
         }
 
         GameObject.prototype.onCollision = function (collidingObj) {
-            console.log(this);
-            console.log(" is in collision with ");
-            console.log(collidingObj);
-        }
+            //console.log(this);
+            //console.log(" is in collision with ");
+            //console.log(collidingObj);
+        };
 
         return GameObject;
     }());
