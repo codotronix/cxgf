@@ -1,5 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
+    background: #000;
 }
 
 #game-arena {
@@ -9,6 +14,55 @@ body {
     left: 0;
     right: 0;
     /*background: cornflowerblue;*/
+}
+
+#control-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    right: 0;
+    /*background: rgba(255,255,255,.1);*/
+}
+
+#control-panel .play-pause-button.pause {
+    display: none;
+    font-size: 30px;
+    padding: 7px 0 0 10px;
+}
+
+#control-panel .play {
+    color: lightgreen;
+    /*border: 2px solid lightgreen;    */
+}
+
+#control-panel .pause {
+    /*border: 2px solid red;    */
+    color: red;
+}
+
+#control-panel .play-pause-button {
+    position: absolute;
+    /*color: red;*/
+    font-size: 35px;
+    top: 7px;
+    left: 27px;
+    /*border: 2px solid cyan;*/
+    width: 50px;
+    height: 50px;
+    padding: 6px 5px 2px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    /*opacity: .7;*/
+    /*background: rgba(255,255,255,.1);*/
+}
+
+#control-panel.playing .pause {
+    display: block;
+}
+
+#control-panel.playing .play {
+    display: none;
 }
 
 .boundary {
@@ -49,7 +103,22 @@ body {
 .ball {
     height: 30px;
     width: 30px;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
+    background: orange;
+    position: absolute;
+}
+
+#player-ball {
+    height: 40px;
+    width: 40px;
+    /*border-radius: 50%;*/
     background: cornflowerblue;
     position: absolute;
+}
+
+#player-home {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    border: 5px solid blue;
 }

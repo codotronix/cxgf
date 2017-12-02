@@ -84,7 +84,9 @@
     }
 
     function isColliding (objA, objB) {
-        if ((objA.x + objA.width) < objB.x
+
+        if (objA._objID === objB._objID
+            || (objA.x + objA.width) < objB.x
             || objA.x > (objB.x + objB.width)
             || (objA.y + objA.height) < objB.y
             || objA.y > (objB.y + objB.height)
