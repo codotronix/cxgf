@@ -1,0 +1,24 @@
+{
+  "name": "cxgf",
+  "version": "1.0.0",
+  "description": "Codotronix Game Framework",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codotronix/cxgf.git"
+  },
+  "author": "Suman Barick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codotronix/cxgf/issues"
+  },
+  "homepage": "https://github.com/codotronix/cxgf#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.0"
+  }
+}

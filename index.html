@@ -1,40 +1,83 @@
 <!DOCTYPE html>
-<html data-ng-app="MainApp">
+<html>
 	<head>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Basic App</title>
-		<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/custom/style.css">	
-		<script src="js/lib/jquery-1.10.2.min.js"></script>
-		<script src="js/lib/angular.min.js"></script>
-		<script src="js/custom/app.js"></script>
-		<script src="js/custom/servc_cxge.js"></script>
-		<script src="js/custom/directive-enemy-tank.js"></script>
-		<script src="js/custom/ctrl_tankCtrl.js"></script>
-		
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	    <!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
+		<title>Codotronix Game Framework</title>
+		<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/index.css">
 	</head>
-	<body>
-		<div id="battleField" data-ng-controller="mainCtrl" style="height:{{field.height}}px;width:{{field.width}}px;">
+	<body class="container-fluid">
 
-			<!-- The Player Tank -->
-			<div id="tank" data-ng-controller="tankCtrl" class="{{tank.direction}}" style="top:{{tank.top}}px;left:{{tank.left}}px;"></div>
+		<h1>Testing Codotronix Game Framework (cxgf)</h1>
 
-			<!-- Player Bullet -->
 
-			<!-- The Enemy Tanks -->
-			<enemy-tank tank-id="1"></enemy-tank>
-			<enemy-tank tank-id="2"></enemy-tank>
-			<enemy-tank tank-id="3"></enemy-tank>
-			<enemy-tank tank-id="4"></enemy-tank>
-			<enemy-tank tank-id="5"></enemy-tank>
-		</div>			
+		<div class="panel panel-primary">
+            <div class="panel-heading collapse-header">
+                <h3 class="panel-title">Test 1</h3>
+            </div>
+            <div class="panel-body collapse-body">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                	<p>
+                		This example tests
+                		<ol>
+                			<li>cxgf.KeyEvent.onKeyPress(Key_Name, callbackFn, object)</li>
+                			<li>cxgf.Collision.watch(objA, objB)</li>
+                			<li>cxgf.Collision.startWatching()</li>
+                		</ol>
+                	</p>
+                    <p>Left Arrow and Right Arrow should move Blue-Box</p>
+					<p>Up Arrow and Down Arrow should move Red-Box</p>
+					<label>Collision Counter: 
+						<span id="collisioncounter">0</span>
+					</label>
+					<div class="demo-box-container well">
+						<div id="box1" class="floating-box blue"></div>
+						<div id="box2" class="floating-box red"></div>
+					</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading collapse-header">
+                <h3 class="panel-title">Test 2</h3>
+            </div>
+            <div class="panel-body collapse-body">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                	<p>
+                		This example tests
+                		<ol>
+                			<li>cxgf.Ticker.onTick(callbackFn, Obj)</li>
+    						<li>cxgf.Ticker.startTick()</li>
+    						<li>cxgf.Ticker.stopTick()</li>
+                		</ol>
+                	</p>
+                    <p>This orange box should move automatically once ticker is started</p>
+					<p class="">
+						<button type="button" class="btn btn-primary" onclick="b3.x=550;b3.y=80;cxgf.Ticker.startTick()">Reset &amp; Start Ticker</button>					
+						<button type="button" class="btn btn-primary" onclick="cxgf.Ticker.stopTick();">Stop Ticker</button>
+					</p>		
+					<div class="demo-box-container well">
+						<div id="box3" class="floating-box orange"></div>		
+					</div>
+                </div>
+            </div>
+        </div>
+
+		<script type="text/javascript" src="js/lib/jquery-2.2.4.min.js"></script>
+		
+
+		<!-- cxgf scripts -->
+		<script type="text/javascript" src="js/cxgf-modules/cxgf-init.js"></script>
+		<script type="text/javascript" src="js/cxgf-modules/cxgf.GameObject.js"></script>
+		<script type="text/javascript" src="js/cxgf-modules/cxgf.KeyEvent.js"></script>
+		<script type="text/javascript" src="js/cxgf-modules/cxgf.Ticker.js"></script>
+		<script type="text/javascript" src="js/cxgf-modules/cxgf.Collision.js"></script>
+
+		<!-- <script type="text/javascript" src="dist/cxgf.min.js"></script> -->
+
+		<script type="text/javascript" src="js/custom/index.js"></script>
 	</body>
 </html>
