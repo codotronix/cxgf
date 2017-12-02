@@ -104,20 +104,24 @@
 
         _GameObject.prototype.moveLeft = function () {
             this.x -= (this.speedX || this.speed);
+            this.direction = "W";
             this.render();
         };
 
         _GameObject.prototype.moveRight = function () {
             this.x += (this.speedX || this.speed);
+            this.direction = "E";
             this.render();
         };
 
         _GameObject.prototype.moveUp = function () {
+            this.direction = "N";
             this.y -= (this.speedY || this.speed);
             this.render();
         };
 
         _GameObject.prototype.moveDown = function () {
+            this.direction = "S";
             this.y += (this.speedY || this.speed);
             this.render();
         };
@@ -132,7 +136,7 @@
             else if (direction === 'UP' || direction === 'N') {
                 this.moveUp();
             }
-            else if (direction === 'down' || direction === 'S') {
+            else if (direction === 'DOWN' || direction === 'S') {
                 this.moveDown();
             }
             else if (direction === 'RANDOM-4' || direction === undefined) {

@@ -4,9 +4,41 @@
     var worldHeight = $('#game-arena').height();
     
     
-    var numberOfBalls = 10;
+    var numberOfBalls = 20;
     var balls = [];
     var boundaries = [];
+
+    var playerInitX = 20;
+    var playerInitY = worldHeight/2 - 35;
+
+    //Let's create player ball
+    var player = cxgf.GameObject.create({
+                    x: playerInitX,
+                    y: playerInitY,
+                    height: 40,
+                    width: 40,
+                    speed: 2,
+                    htmlId: 'player-ball',
+                    type: "PLAYER",
+                    onCollision: playerCollision
+                });
+
+
+    //Player can be moved with Arrow Keys
+    cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.LEFT, player.moveLeft, player);
+    cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.RIGHT, player.moveRight, player);
+    cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.UP, player.moveUp, player);
+    cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.DOWN, player.moveDown, player);
+
+    //Let's create player-home where player can rest, a safe zone
+    var playerHome = cxgf.GameObject.create({
+                    x: 0,
+                    y: (worldHeight /2 - 54),
+                    height: 80,
+                    width: 80,
+                    htmlId: 'player-home',
+                    type: "PLAYER-HOME"
+                });
 
     //Let's create 20 balls html
     createBallsHtml(numberOfBalls);
@@ -20,10 +52,31 @@
     //Let's make them move on tick
     randomMovementOnTick();
 
-    //Start Watching for Collisions between Balls And Walls
+    //Start Watching for Collisions between Balls And Walls And Player
+    cxgf.Collision.watch(player, boundaries);
+    cxgf.Collision.watch(player, balls);
     cxgf.Collision.watch(balls, boundaries);
+    cxgf.Collision.watch(balls, playerHome);
     cxgf.Collision.startWatching();
 
+    cxgf.Ticker.stopTick();
+
+    activatePlayPauseFunctionality();
+
+    /*
+    * This function is called when player is colliding
+    */
+    function playerCollision (collidingObj) {
+        if (collidingObj.type === "WALL") {
+            player.turnAround();
+        }
+        else {
+            alert("Player Hit");
+            player.x = playerInitX;
+            player.y = playerInitY;
+            player.render();
+        }
+    }
 
     /*
     * This function create given numberOfBalls html balls 
@@ -48,16 +101,19 @@
     function createBallObjects (numberOfBalls) {
         for(var i=0; i<numberOfBalls; i++) {
             balls.push(cxgf.GameObject.create({
-                x: (Math.random() * (worldWidth - 100) + 50),
-                y: (Math.random() * (worldHeight - 100) + 50),
+                x: (Math.random() * (worldWidth - 150) + 100),
+                y: (Math.random() * (worldHeight - 150) + 100),
                 height: 30,
                 width: 30,
                 speed: 2 + (Math.random() * 2),
                 htmlId: 'ball' + i,
+                type: "ENEMY",
                 holdDirectionNTurns: Math.floor(Math.random() * 9 + 5),
-                onCollision: function (collidinObj) {
+                onCollision: function (collidingObj) {
                     //console.log("overrridden collision function called");
-                    this.turnAround();
+                    if(collidingObj.type === "WALL" || collidingObj.type === "PLAYER-HOME") {
+                        this.turnAround();
+                    }                    
                 }
             }));
         }
@@ -77,7 +133,8 @@
             x: 0,
             y: 0,
             height: worldHeight,
-            width: 3
+            width: 3,
+            type: "WALL"
         }));
 
         // Top Boundary
@@ -85,7 +142,8 @@
             x: 0,
             y: 0,
             height: 3,
-            width: worldWidth
+            width: worldWidth,
+            type: "WALL"
         }));
 
         // Right Boundary
@@ -93,7 +151,8 @@
             x: worldWidth-3,
             y: 0,
             height: worldHeight,
-            width: 3
+            width: 3,
+            type: "WALL"
         }));
 
         // Bottom Boundary
@@ -101,7 +160,8 @@
             x: 0,
             y: worldHeight-3,
             height: 3,
-            width: worldWidth
+            width: worldWidth,
+            type: "WALL"
         }));
     }
 
@@ -113,5 +173,20 @@
         for (var i in balls) {
             cxgf.Ticker.onTick(balls[i].move, balls[i], 5);
         }
+    }
+
+
+    /*
+    */
+    function activatePlayPauseFunctionality () {
+        $('#control-panel').on('click', '.play', function(ev) {
+            $('#control-panel').addClass('playing');
+            cxgf.Ticker.startTick();
+        });
+
+        $('#control-panel').on('click', '.pause', function(ev) {
+            $('#control-panel').removeClass('playing');
+            cxgf.Ticker.stopTick();
+        });
     }
 })();
