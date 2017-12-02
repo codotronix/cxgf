@@ -47,7 +47,7 @@
     */
     function createBallObjects (numberOfBalls) {
         for(var i=0; i<numberOfBalls; i++) {
-            balls.push(new cxgf.GameObject({
+            balls.push(cxgf.GameObject.create({
                 x: (Math.random() * (worldWidth - 100) + 50),
                 y: (Math.random() * (worldHeight - 100) + 50),
                 height: 30,
@@ -73,7 +73,7 @@
     function createBoundaryObjects () {
 
         // Left Boundary
-        boundaries.push(new cxgf.GameObject({
+        boundaries.push(cxgf.GameObject.create({
             x: 0,
             y: 0,
             height: worldHeight,
@@ -81,7 +81,7 @@
         }));
 
         // Top Boundary
-        boundaries.push(new cxgf.GameObject({
+        boundaries.push(cxgf.GameObject.create({
             x: 0,
             y: 0,
             height: 3,
@@ -89,7 +89,7 @@
         }));
 
         // Right Boundary
-        boundaries.push(new cxgf.GameObject({
+        boundaries.push(cxgf.GameObject.create({
             x: worldWidth-3,
             y: 0,
             height: worldHeight,
@@ -97,7 +97,7 @@
         }));
 
         // Bottom Boundary
-        boundaries.push(new cxgf.GameObject({
+        boundaries.push(cxgf.GameObject.create({
             x: 0,
             y: worldHeight-3,
             height: 3,

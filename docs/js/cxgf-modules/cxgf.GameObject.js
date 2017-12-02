@@ -23,8 +23,7 @@
 (function(window){
 
     window.cxgf.GameObject = {
-        create: createObject,
-        getAll: getAll
+        create: createObject
     };
 
     var _gameObjects = [];
@@ -35,7 +34,7 @@
     /*
     * Create a Game Object
     * Must Pass the gameObjectConfig
-        GameObjectConfig:
+        GameObjectConfig = {
             x: position_X
             y: position_Y
             speed:
@@ -47,25 +46,17 @@
                 // random moves only. It indicates after how many turns or ticks
                 // the direction should be randomized again
                 // default is 10
-            holdDirectionNTurns:
+            holdDirectionNTurns: 
 
-    *
+
+
+
+    *   }
     */
     function createObject (gameObjectConfig) {
         var newGameObj = new _GameObject(gameObjectConfig);
         _gameObjects.push(newGameObj);
         return newGameObj;
-    }
-
-
-    /*
-        Get All Game Objects that meet a certain criteria
-        If no identifier is passed, return all the ojects
-    */
-    function getAll (identifier) {
-        if(identifier === undefined) {
-            return _gameObjects;
-        }
     }
 
 
