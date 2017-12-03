@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Random Balls</title>
+        <title>Beware of Boxes!</title>
         <link rel="stylesheet" type="text/css" href="styles/index.css">
         <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
     </head>
@@ -13,13 +13,28 @@
             <div id="control-panel">
                 <span class="play-pause-button fa fa-play play"></span>
                 <span class="play-pause-button fa fa-pause pause"></span>
+
+                <div id="life-indicators"></div>
             </div>
-            <div id="player-home"></div>
+            <div id="player-home" class="home"></div>
+
+            <span id="winning-flag" class="fa fa-flag"></span>
+
             <div class="top-boundary boundary"></div>
             <div class="bottom-boundary boundary"></div>
             <div class="left-boundary boundary"></div>
             <div class="right-boundary boundary"></div>
             <div id="player-ball"></div>
+
+            <div id="start-modal">
+                <h1>Beware of Boxes!</h1>
+                <div class="instruction">
+                    <b><u>Instruction:</u></b> Use arrow keys to move your blue box. Avoid touching the orange boxes. Capture the flag on the other side to win.
+                </div>
+                <span class="fa fa-play big-play"></span>
+                <br/>
+                <label>PLAY</label>
+            </div>
         </div>
 
         <script type="text/javascript" src="../../js/lib/jquery-2.2.4.min.js"></script>        

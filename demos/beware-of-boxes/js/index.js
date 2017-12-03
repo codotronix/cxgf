@@ -10,6 +10,7 @@
 
     var playerInitX = 20;
     var playerInitY = worldHeight/2 - 35;
+    var totalLife = 3;
 
     //Let's create player ball
     var player = cxgf.GameObject.create({
@@ -40,6 +41,16 @@
                     type: "PLAYER-HOME"
                 });
 
+    //Let's create the winning-flag
+    var winningFlag = cxgf.GameObject.create({
+                    x: (worldWidth - 60),
+                    y: (worldHeight /2 - 27),
+                    height: 54,
+                    width: 54,
+                    htmlId: 'winning-flag',
+                    type: "FLAG"
+                });
+
     //Let's create 20 balls html
     createBallsHtml(numberOfBalls);
 
@@ -55,13 +66,13 @@
     //Start Watching for Collisions between Balls And Walls And Player
     cxgf.Collision.watch(player, boundaries);
     cxgf.Collision.watch(player, balls);
+    cxgf.Collision.watch(player, winningFlag);
     cxgf.Collision.watch(balls, boundaries);
     cxgf.Collision.watch(balls, playerHome);
-    cxgf.Collision.startWatching();
 
     cxgf.Ticker.stopTick();
 
-    activatePlayPauseFunctionality();
+    activatePlayPauseFunctionality();    
 
     /*
     * This function is called when player is colliding
@@ -70,11 +81,25 @@
         if (collidingObj.type === "WALL") {
             player.turnAround();
         }
+        else if(collidingObj.type === "FLAG") {
+            _pause();
+            alert("Victory is Yours...");
+            $('#start-modal').show();
+        }
         else {
-            alert("Player Hit");
-            player.x = playerInitX;
-            player.y = playerInitY;
-            player.render();
+            totalLife--;
+            showLifeAvailable();
+            if(totalLife < 0) {
+                _pause();
+                alert("Game Over");
+                $('#start-modal').show();
+            }
+            else {
+                alert("Player Hit");
+                player.x = playerInitX;
+                player.y = playerInitY;
+                player.render();
+            }            
         }
     }
 
@@ -91,6 +116,18 @@
         $('#game-arena').append(ballHtml);
     }
 
+
+    /*
+    * This function draws the red hearts reading the global var totalLife
+    */
+    function showLifeAvailable () {
+        var htm = '';
+        for(var i=0; i < totalLife; i++) {
+            htm += '<span class="fa fa-heart life-heart"></span>';
+        }
+
+        $('#life-indicators').html(htm);
+    }
 
     /*
     * This function creates given number of ball objects
@@ -179,14 +216,36 @@
     /*
     */
     function activatePlayPauseFunctionality () {
-        $('#control-panel').on('click', '.play', function(ev) {
-            $('#control-panel').addClass('playing');
-            cxgf.Ticker.startTick();
-        });
+        $('#control-panel').on('click', '.play', _resume);
 
-        $('#control-panel').on('click', '.pause', function(ev) {
-            $('#control-panel').removeClass('playing');
-            cxgf.Ticker.stopTick();
-        });
+        $('#control-panel').on('click', '.pause', _pause);
+
+        $('.big-play').on('click', _startGame);
+    }
+
+    function _startGame (ev) {
+        //reset player position
+        player.x = playerInitX;
+        player.y = playerInitY;
+        player.render();
+
+        //reset Life
+        totalLife = 3;
+        showLifeAvailable();
+
+        $('#start-modal').hide();
+        _resume(ev);
+    }
+
+    function _resume (ev) {
+        $('#control-panel').addClass('playing');
+        cxgf.Ticker.startTick();
+        cxgf.Collision.startWatching();
+    } 
+
+    function _pause (ev) {
+        $('#control-panel').removeClass('playing');
+        cxgf.Ticker.stopTick();
+        cxgf.Collision.stopWatching();
     }
 })();
