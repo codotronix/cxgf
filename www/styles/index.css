@@ -59,6 +59,12 @@
   font-style: normal;
 }
 
+iframe {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
 .fa {
   user-select: none;
 }
@@ -94,9 +100,14 @@ body {
 
 #manual-page {
   color: #000063;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  position: relative;
+  height: 85vh;
 }
 
-#manual-page .topic-table .topic-name,
+/*#manual-page .topic-table .topic-name,
 #manual-page .topic-table .topic-body {
   overflow: auto;
   word-break: break-word;
@@ -118,7 +129,7 @@ body {
 #manual-page .module-details-container .subheading {
   text-align: center;
   text-decoration: underline;
-}
+}*/
 
 ul {
   padding: 0;
