@@ -1,1 +1,26 @@
-Manual
+<div id="manual-page">
+
+    <!-- Modules Panel Start -->
+    <div class="panel panel-primary">
+        <div class="panel-heading collapse-header opened">
+            <i class="fa fa-caret-up collapse-key up"></i>
+            <i class="fa fa-caret-down collapse-key down"></i>
+            <h3 class="panel-title">Modules</h3>
+        </div>
+        <div class="panel-body collapse-body">
+            <ol class="roman">
+                <li data-ng-repeat="topic in vm.topics" class="padding-top-5">
+                    {{topic.title}}
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- Modules Panel End -->
+
+    <!-- Module Details Cntainer Start -->
+    <div>
+        <div class="module-details-container" data-ng-include="'www/templates/manuals/gameobject.html'"></div>
+    </div>
+    <!-- Module Details Cntainer End -->
+
+</div>
