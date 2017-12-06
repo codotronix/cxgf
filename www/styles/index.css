@@ -59,6 +59,10 @@
   font-style: normal;
 }
 
+.fa {
+  user-select: none;
+}
+
 .font-rye {
 	font-family: 'Rye', cursive;
 }
