@@ -205,6 +205,13 @@ ol.roman {
     transition: width 1s;
 }
 
+.left-menu .copy-notice {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
 .leftbar-open .left-menu {
   width: 200px;
 }
