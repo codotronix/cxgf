@@ -11,19 +11,29 @@
     var _tickCounter = 0;
     var _tickResetUpperLimit = 27000000;    //27000000 ticks = 125 hours, given 60 ticks/sec
 
+
     /*
     * Add callback function to Ticker
     * skipTick: number of ticks to skip before the function is called again
     */
     function onTick (callbackFn, obj, skipTick) {
+        var tickListenerID = cxgf.Utils.generateID('ticker');
         _tickListener.push({
+            id: tickListenerID,
             fn: callbackFn,
-            obj: obj,
+            obj: obj || window,
             skipTick: (skipTick === undefined || skipTick < 0) ? 1 : skipTick
         });
 
         //start the tick
         startTick();
+
+        return tickListenerID;
+    }
+
+    function _gerenateUniqueID () {
+        var tickID = (Math.random() * Math.random() * 999999999).toString().replace(/[.]/g, '-');
+
     }
 
     function startTick () {
@@ -38,7 +48,7 @@
     }
 
     function _tick () {
-        if(!_tickRunning || _tickListener.length <= 0) {
+        if(!_tickRunning) {
             return;
         }
         _tickCounter++;

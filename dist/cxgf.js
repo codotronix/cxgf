@@ -1,3 +1,262 @@
+(function(window){
+
+    window.cxgf = {};
+
+})(window);
+(function(window){
+    window.cxgf.Utils = {
+        generateID: generateID,
+        deleteID: deleteID
+    };
+
+    var _allIDs = [];
+
+    function generateID (prepend) {
+        var id;
+        prepend = prepend || 'gobj';
+
+        while (id === undefined || _allIDs.indexOf(id) >= 0) {
+            id = prepend + '-' + (Math.random() * (parseInt(Math.random().toString().replace(/[.]/g,'')))).toString().replace(/[.]/g,'-');
+        }
+
+        _allIDs.push(id);
+        return id;
+    }
+
+    function deleteID (id) {
+        _allIDs.splice(_allIDs.indexOf(id), 1);
+    }
+
+})(window);
+(function(window){
+
+    window.cxgf.Ticker = {
+        onTick: onTick,
+        startTick: startTick,
+        stopTick: stopTick
+    };
+
+    var _tickRunning = false;
+    var _tickListener = [];
+    var _tickCounter = 0;
+    var _tickResetUpperLimit = 27000000;    //27000000 ticks = 125 hours, given 60 ticks/sec
+
+
+    /*
+    * Add callback function to Ticker
+    * skipTick: number of ticks to skip before the function is called again
+    */
+    function onTick (callbackFn, obj, skipTick) {
+        var tickListenerID = cxgf.Utils.generateID('ticker');
+        _tickListener.push({
+            id: tickListenerID,
+            fn: callbackFn,
+            obj: obj || window,
+            skipTick: (skipTick === undefined || skipTick < 0) ? 1 : skipTick
+        });
+
+        //start the tick
+        startTick();
+
+        return tickListenerID;
+    }
+
+    function _gerenateUniqueID () {
+        var tickID = (Math.random() * Math.random() * 999999999).toString().replace(/[.]/g, '-');
+
+    }
+
+    function startTick () {
+        if(!_tickRunning) {
+            _tickRunning = true;
+            _tick();
+        }        
+    }
+
+    function stopTick () {
+        _tickRunning = false;
+    }
+
+    function _tick () {
+        if(!_tickRunning || _tickListener.length <= 0) {
+            return;
+        }
+        _tickCounter++;
+
+        for(var i in _tickListener) {
+            if(_tickCounter % _tickListener[i].skipTick === 0) {
+                _tickListener[i].fn.apply(_tickListener[i].obj);
+            }            
+        }
+
+        //reset the counter if a certain upper limit is reached
+        // to prevent integer overflow kind of mess
+        if(_tickCounter === _tickResetUpperLimit) {
+            _tickCounter = 0;
+        }
+
+        setTimeout(_tick, 1000/60);
+    }
+    
+
+
+})(window);
+(function(window){
+
+    window.cxgf.KeyEvent = {
+        onKeyPress: onKeyPress,
+
+        keys: {
+            "LEFT": 37,
+            "UP": 38,
+            "RIGHT": 39,
+            "DOWN": 40,
+            "SPACE": 32
+        }
+    };
+
+    var _keyPressListeners = {};
+
+    init();
+
+    function init () {
+        bindKeyPressEvent();
+    }
+
+    function onKeyPress (key, callbackFn, obj) {
+        if(_keyPressListeners[key] == undefined) {
+            _keyPressListeners[key] = [];
+        }
+        _keyPressListeners[key].push({
+            fn: callbackFn,
+            obj: obj
+        });
+    }
+
+
+    function bindKeyPressEvent(){
+        $(document).on('keydown', function(ev){
+            //loop thru all listener object 
+            //and call all listening callback functions
+            for(var key in _keyPressListeners) {
+                if(ev.keyCode == key) {
+                    for(var i in _keyPressListeners[key]) {
+                        _keyPressListeners[key][i].fn.apply(_keyPressListeners[key][i].obj);
+                    }
+                }
+            }
+        })
+    }
+
+
+})(window);
+(function(window){
+
+    window.cxgf.Collision = {
+        watch: watchCollision,
+        isColliding: isColliding
+    };
+
+    /*
+    * _collisionPairs will contain collision group pairs, e.g.
+        [
+            {
+                group1: [StarA, StarB, StarC],
+                group2: [RocketA, RocketB, RocketC]
+            },
+            {
+                group1: [Enemy1, Enemy2, Enemy3, Enemy4, Enemy5],
+                group2: [Bullet1]
+            }
+        ]
+    */
+    var _collisionPairs = [];
+    //var collisionDetectionOn = false;
+
+    init();
+
+    function init () {
+        cxgf.Ticker.onTick(_detectCollision);
+    }
+
+    /*
+    * This function will add a pair of 2 collision groups into _collisionPairs
+    */
+    function watchCollision (objArr1, objArr2) {
+        _collisionPairs.push({
+            group1: $.isArray(objArr1) ? objArr1 : [objArr1],
+            group2: $.isArray(objArr2) ? objArr2 : [objArr2]
+        }); 
+    }
+
+
+    /*
+    * This function will keep in running in a loop,
+    * Detecting all the collisions between the object pairs present in
+    * _collisionPairs
+    */
+    function startWatching () {
+        // if(!collisionDetectionOn) {
+        //     collisionDetectionOn = true;
+        //     _detectCollision();
+        // }
+    }
+
+    function stopWatching () {
+        //collisionDetectionOn = false;
+    }
+
+    /*
+    * This function will loop thru all the collision pairs
+    * to see if there is any collision.
+    * If there is any collision, 
+    * then "onCollision" function on that object is called
+    */
+    function _detectCollision () {
+        // if(!collisionDetectionOn || _collisionPairs.length <= 0) {
+        //     return;
+        // }
+
+        var pair;
+        for (var i in _collisionPairs) {
+            pair = _collisionPairs[i];
+            
+            for(var j in pair.group1) {
+                for (var k in pair.group2) {
+                    if(isColliding(pair.group1[j], pair.group2[k])) {
+                        if(pair.group1[j].onCollision !== undefined) {
+                            pair.group1[j].onCollision(pair.group2[k]);
+                        }
+
+                        if(pair.group2[k].onCollision !== undefined) {
+                            pair.group2[k].onCollision(pair.group1[j]);
+                        }
+                    }
+                }
+            }
+        }
+
+        //setTimeout(_detectCollision, 1000/60);
+    }
+
+    function isColliding (objA, objB) {
+
+        if (objA._objID === objB._objID
+            || (objA.x + objA.width) < objB.x
+            || objA.x > (objB.x + objB.width)
+            || (objA.y + objA.height) < objB.y
+            || objA.y > (objB.y + objB.height)
+            ) 
+        {
+            //no collision
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+})(window);
 /*
 *   GameObjectConfig = {
         x: position_X
@@ -28,7 +287,6 @@
     };
 
     var _gameObjects = [];
-    var _grounds = [];  //can stand on these, to be collision checked on gravity
     //var _objIDCounter = 0;
 
     init();
@@ -55,11 +313,6 @@
     function createObject (gameObjectConfig) {
         var newGameObj = new _GameObject(gameObjectConfig);
         _gameObjects.push(newGameObj);
-
-        if(newGameObj.type === 'ground') {
-            _grounds.push(newGameObj);
-        }
-
         return newGameObj;
     }
 
@@ -91,8 +344,6 @@
         this.speedY = this.speedY || this.speed;
         this.directionSense = this.directionSense || 4;
         this.holdDirectionNTurns = this.holdDirectionNTurns || 9;
-        this.gravityOn = this.gravityOn || false;
-        this.weight = this.weight || 1;             //100 is immovable object
 
         //_gameObjects.push(this);
 
@@ -101,21 +352,6 @@
     
     function init () {
         _initGameObjectCommonMethods();
-        cxgf.Ticker.onTick(_watchGravity);
-    }
-
-    function _watchGravity() {
-        for(var i = 0; i < _gameObjects.length; i++) {
-            if(_gameObjects[i].gravityOn) {
-                _gameObjects[i].y += .5;
-
-                if(cxgf.Collision.isCollidingGroup(_gameObjects[i], _grounds)) {
-                    _gameObjects[i].y -= .5;
-                }
-
-                _gameObjects[i].render();
-            }
-        }
     }
 
     function _initGameObjectCommonMethods () {
@@ -211,7 +447,6 @@
             //console.log(this);
             //console.log(" is in collision with ");
             //console.log(collidingObj);
-
         };
     }
 

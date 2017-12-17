@@ -1,14 +1,23 @@
 //(function(){
 
     /*******************************************************/
+    var ground = window.cxgf.GameObject.create({
+        x: 0,
+        y: 125,
+        height: 10,
+        width: 700,
+        htmlId: 'ground',
+        type: 'ground'
+    });
 
     var b1 = cxgf.GameObject.create({
         x: 100,
-        y: 100,
+        y: 0,
         height: 50,
         width: 50,
         speed: 7,
-        htmlId: 'box1'
+        htmlId: 'box1',
+        gravityOn: true
     });
 
     var collisionCounter = 0;
@@ -20,11 +29,12 @@
 
     var b2 = window.cxgf.GameObject.create({
         x: 250,
-        y: 100,
+        y: 0,
         height: 50,
         width: 50,
         speed: 5,
-        htmlId: 'box2'
+        htmlId: 'box2',
+        gravityOn: true
     });
 
     var b3 = window.cxgf.GameObject.create({
@@ -34,16 +44,19 @@
         htmlId: 'box3'
     });
 
+    
+
     cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.LEFT, b1.moveLeft, b1);
     cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.RIGHT, b1.moveRight, b1);
     cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.UP, b2.moveUp, b2);
     cxgf.KeyEvent.onKeyPress(cxgf.KeyEvent.keys.DOWN, b2.moveDown, b2);
 
     cxgf.Collision.watch(b1, b2);
-    cxgf.Collision.startWatching();
+    cxgf.Collision.watch(b1, ground);
+    //cxgf.Collision.startWatching();
 
     cxgf.Ticker.onTick(b3.move, b3);
-    cxgf.Ticker.stopTick();
+    //cxgf.Ticker.stopTick();
     /*********************************************************************/
 
 

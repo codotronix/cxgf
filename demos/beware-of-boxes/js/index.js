@@ -240,12 +240,12 @@
     function _resume (ev) {
         $('#control-panel').addClass('playing');
         cxgf.Ticker.startTick();
-        cxgf.Collision.startWatching();
+        //cxgf.Collision.startWatching();
     } 
 
     function _pause (ev) {
         $('#control-panel').removeClass('playing');
         cxgf.Ticker.stopTick();
-        cxgf.Collision.stopWatching();
+        //cxgf.Collision.stopWatching();
     }
 })();

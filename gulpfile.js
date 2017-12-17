@@ -5,8 +5,15 @@ var gulp  = require('gulp'),
 //Process script files
 gulp.task('concatScripts', function() {
   return gulp.src([
-        'js/cxgf-modules/*.js'
+        'cxgf-modules/cxgf-init.js',
+        'cxgf-modules/cxgf.Utils.js',
+        'cxgf-modules/cxgf.Ticker.js',
+        'cxgf-modules/cxgf.KeyEvent.js',
+        'cxgf-modules/cxgf.Collision.js',
+        'cxgf-modules/cxgf.GameObject.js'
     ])
+    .pipe(concat('cxgf.js'))
+    .pipe(gulp.dest('dist/'))
     .pipe(concat('cxgf.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/'));

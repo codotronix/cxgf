@@ -3,8 +3,7 @@
     window.cxgf.Collision = {
         watch: watchCollision,
         isColliding: isColliding,
-        startWatching: startWatching,
-        stopWatching: stopWatching
+        isCollidingGroup: isCollidingGroup
     };
 
     /*
@@ -21,7 +20,13 @@
         ]
     */
     var _collisionPairs = [];
-    var collisionDetectionOn = false;
+    //var collisionDetectionOn = false;
+
+    init();
+
+    function init () {
+        cxgf.Ticker.onTick(_detectCollision);
+    }
 
     /*
     * This function will add a pair of 2 collision groups into _collisionPairs
@@ -40,14 +45,14 @@
     * _collisionPairs
     */
     function startWatching () {
-        if(!collisionDetectionOn) {
-            collisionDetectionOn = true;
-            _detectCollision();
-        }
+        // if(!collisionDetectionOn) {
+        //     collisionDetectionOn = true;
+        //     _detectCollision();
+        // }
     }
 
     function stopWatching () {
-        collisionDetectionOn = false;
+        //collisionDetectionOn = false;
     }
 
     /*
@@ -57,9 +62,9 @@
     * then "onCollision" function on that object is called
     */
     function _detectCollision () {
-        if(!collisionDetectionOn || _collisionPairs.length <= 0) {
-            return;
-        }
+        // if(!collisionDetectionOn || _collisionPairs.length <= 0) {
+        //     return;
+        // }
 
         var pair;
         for (var i in _collisionPairs) {
@@ -80,7 +85,22 @@
             }
         }
 
-        setTimeout(_detectCollision, 1000/60);
+        //setTimeout(_detectCollision, 1000/60);
+    }
+
+    function isCollidingGroup (arr1, arr2) {
+        var group1 = $.isArray(arr1) ? arr1 : [arr1];
+        var group2 = $.isArray(arr2) ? arr2 : [arr2];
+
+        for(var j in group1) {
+            for (var k in group2) {
+                if(isColliding(group1[j], group2[k])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     function isColliding (objA, objB) {
