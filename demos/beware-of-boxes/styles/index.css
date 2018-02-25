@@ -178,3 +178,65 @@ body {
     color: #fff;
     padding: 0 15px;
 }
+
+.joystick {
+    position: absolute;
+    bottom: 0;
+}
+
+.joystick .fa {
+    color: rgba(255, 255, 0, 0.5);
+    /*background-color: rgba(88, 102, 171, 0.38);*/
+    background-color: rgba(255, 255, 255, 0.25);
+    z-index: 9999;
+    position: absolute;    
+    border-radius: 50%;
+}
+
+#left-joystick {
+    left: 0;
+}
+
+#right-joystick {
+    right: 0;
+}
+
+/*#right-joystick .fire {
+    font-size: 70px;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
+}*/
+
+#left-joystick .fa {
+    padding: 10px;
+    font-size: 50px;
+    width: 70px;
+    height: 70px;
+}
+
+
+#left-joystick .left {
+    left: 10px;
+    bottom: 57.5px;
+}
+
+#left-joystick .down {
+    left: 60px;
+    bottom: 5px;
+}
+
+#left-joystick .right {
+    left: 110px;
+    bottom: 57.5px;
+    text-align: center;
+}
+
+#left-joystick .up {
+    left: 60px;
+    bottom: 110px;
+}

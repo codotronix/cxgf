@@ -16,6 +16,9 @@
         
         <h3>APIs</h3>
         <table class="table">
+
+
+            <!-- ROW cxgf.GameObject.create(gameObjectConfig) -->
             <tr>
                 <td>
                     <b>cxgf.GameObject.create(gameObjectConfig)</b>
@@ -35,6 +38,38 @@
                     </ol>
                 </td>
             </tr>
+            <!-- ******************************************** -->
+
+
+            <!-- ROW cxgf.GameObject.getAll(identifier: JSON) -->
+            <tr>
+                <td>
+                    <b>cxgf.GameObject.getAll(identifier: JSON)</b>
+                </td>
+                <td>
+                    Returns all the Game Objects that match(es) the provided identifier
+                    <ol>
+                        <li>
+                            <b>cxgf.GameObject.getAll()</b> - when identifier is blank, it will return all the GameObjects
+                        </li>
+                        <li>
+                            <b>"identifier" can be a json</b>
+
+    <!-- ********* CAUTION: PRE BLOCK START *************** -->
+    <pre>
+    cxgf.GameObject.getAll({
+        type: "car",
+        color: "red"
+    })
+    </pre>
+    <!-- ********* CAUTION: PRE BLOCK END *************** -->
+                            
+                            It will return all the <i>red car</i> GameObjects
+                        </li>
+                    </ol>
+                </td>
+            </tr>
+
 
             <tr>
                 <td>
@@ -73,14 +108,7 @@
                 </td>
             </tr>
 
-            <tr>
-                <td>
-                    <b>&lt;GameObjectInstance&gt;.getAll(identifier)</b>
-                </td>
-                <td>
-                    Returns all the Game Objects that match(es) the provided identifier, e.g. identifier: {type: "ball"}
-                </td>
-            </tr>
+            
         </table>
 
         <script type="text/javascript" src="../../js/lib/jquery-2.2.4.min.js"></script>

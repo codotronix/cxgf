@@ -78,7 +78,7 @@
     }
 
     function _tick () {
-        if(!_tickRunning || _tickListener.length <= 0) {
+        if(!_tickRunning) {
             return;
         }
         _tickCounter++;
@@ -154,7 +154,8 @@
 
     window.cxgf.Collision = {
         watch: watchCollision,
-        isColliding: isColliding
+        isColliding: isColliding,
+        isCollidingGroup: isCollidingGroup
     };
 
     /*
@@ -239,6 +240,21 @@
         //setTimeout(_detectCollision, 1000/60);
     }
 
+    function isCollidingGroup (arr1, arr2) {
+        var group1 = $.isArray(arr1) ? arr1 : [arr1];
+        var group2 = $.isArray(arr2) ? arr2 : [arr2];
+
+        for(var j in group1) {
+            for (var k in group2) {
+                if(isColliding(group1[j], group2[k])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     function isColliding (objA, objB) {
 
         if (objA._objID === objB._objID
@@ -287,6 +303,7 @@
     };
 
     var _gameObjects = [];
+    var _grounds = [];  //can stand on these, to be collision checked on gravity
     //var _objIDCounter = 0;
 
     init();
@@ -313,6 +330,11 @@
     function createObject (gameObjectConfig) {
         var newGameObj = new _GameObject(gameObjectConfig);
         _gameObjects.push(newGameObj);
+
+        if(newGameObj.type === 'ground') {
+            _grounds.push(newGameObj);
+        }
+
         return newGameObj;
     }
 
@@ -320,10 +342,25 @@
     /*
         Get All Game Objects that meet a certain criteria
         If no identifier is passed, return all the ojects
+
+
     */
-    function getAll (identifier) {
-        if(identifier === undefined) {
+    function getAll (identifierObj) {
+        if(identifierObj === undefined) {
             return _gameObjects;
+        }
+        else {
+            var resultObjects = [];
+
+            for (var i=0; i<_gameObjects.length; i++) {
+                for (var key in identifierObj) {
+                    if(_gameObjects[i][key] === identifierObj[key]) {
+                        resultObjects.push(_gameObjects[i]);
+                    }
+                }
+            }
+
+            return resultObjects;
         }
     }
 
@@ -344,6 +381,8 @@
         this.speedY = this.speedY || this.speed;
         this.directionSense = this.directionSense || 4;
         this.holdDirectionNTurns = this.holdDirectionNTurns || 9;
+        this.gravityOn = this.gravityOn || false;
+        this.weight = this.weight || 1;             //100 is immovable object
 
         //_gameObjects.push(this);
 
@@ -352,6 +391,21 @@
     
     function init () {
         _initGameObjectCommonMethods();
+        cxgf.Ticker.onTick(_watchGravity);
+    }
+
+    function _watchGravity() {
+        for(var i = 0; i < _gameObjects.length; i++) {
+            if(_gameObjects[i].gravityOn) {
+                _gameObjects[i].y += .5;
+
+                if(cxgf.Collision.isCollidingGroup(_gameObjects[i], _grounds)) {
+                    _gameObjects[i].y -= .5;
+                }
+
+                _gameObjects[i].render();
+            }
+        }
     }
 
     function _initGameObjectCommonMethods () {
@@ -447,6 +501,7 @@
             //console.log(this);
             //console.log(" is in collision with ");
             //console.log(collidingObj);
+
         };
     }
 

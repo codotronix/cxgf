@@ -67,10 +67,25 @@
     /*
         Get All Game Objects that meet a certain criteria
         If no identifier is passed, return all the ojects
+
+
     */
-    function getAll (identifier) {
-        if(identifier === undefined) {
+    function getAll (identifierObj) {
+        if(identifierObj === undefined) {
             return _gameObjects;
+        }
+        else {
+            var resultObjects = [];
+
+            for (var i=0; i<_gameObjects.length; i++) {
+                for (var key in identifierObj) {
+                    if(_gameObjects[i][key] === identifierObj[key]) {
+                        resultObjects.push(_gameObjects[i]);
+                    }
+                }
+            }
+
+            return resultObjects;
         }
     }
 

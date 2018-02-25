@@ -18,7 +18,7 @@
                     y: playerInitY,
                     height: 40,
                     width: 40,
-                    speed: 2,
+                    speed: 4,
                     htmlId: 'player-ball',
                     type: "PLAYER",
                     onCollision: playerCollision
@@ -248,4 +248,19 @@
         cxgf.Ticker.stopTick();
         //cxgf.Collision.stopWatching();
     }
+
+
+    //Mobile Screen Touch Keys Bindings
+    $('#left-joystick .left').on("touchstart", function () {
+        player.moveLeft.apply(player);
+    });
+    $('#left-joystick .right').on("touchstart", function () {
+        player.moveRight.apply(player);
+    });
+    $('#left-joystick .up').on("touchstart", function () {
+        player.moveUp.apply(player);
+    });
+    $('#left-joystick .down').on("touchstart", function () {
+        player.moveDown.apply(player);
+    });
 })();
