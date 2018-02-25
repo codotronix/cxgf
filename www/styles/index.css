@@ -319,3 +319,10 @@ ul.no-bullets {
 .collapse-header.opened .up {
     display: inline-block;
 }
+
+
+@media (max-width: 767px) {
+  .header {
+    font-size: 18px;
+  }
+}
