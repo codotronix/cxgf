@@ -165,6 +165,13 @@ ol.roman {
 	width: 50px;
 }
 
+#ground {
+  position: absolute;
+  height: 10px;
+  width: 700px;
+  background: cadetblue;
+}
+
 .blue {
 	background: #00f;
 }
@@ -318,11 +325,4 @@ ul.no-bullets {
 .collapse-header.closed .down,
 .collapse-header.opened .up {
     display: inline-block;
-}
-
-
-@media (max-width: 767px) {
-  .header {
-    font-size: 18px;
-  }
 }
