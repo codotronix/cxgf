@@ -210,6 +210,28 @@
             }
         };
 
+        _GameObject.prototype.startContinuousMove = function (skipTick, isRandom) {
+            if (!this.continuousMoveCBRef) {
+                this.continuousMoveCBRef = cxgf.Ticker.onTick(moveInDirection, undefined, skipTick)
+            }
+
+            var _this = this;
+            function moveInDirection () {
+                if(!isRandom) {
+                    _this.move(_this.direction);
+                }
+                else {
+                    _this.move();
+                }
+                
+            }
+        }
+
+        _GameObject.prototype.stopContinuousMove = function () {
+            cxgf.Ticker.removeTick(this.continuousMoveCBRef);
+            this.continuousMoveCBRef = undefined;
+        }
+
         _GameObject.prototype.turnAround = function () {
             var oppositeDirections = {
                 'E': 'W',
