@@ -2,8 +2,7 @@
 
     window.cxgf.Collision = {
         watch: watchCollision,
-        isColliding: isColliding,
-        isCollidingGroup: isCollidingGroup
+        isColliding: isCollidingGroup
     };
 
     /*
@@ -72,7 +71,7 @@
             
             for(var j in pair.group1) {
                 for (var k in pair.group2) {
-                    if(isColliding(pair.group1[j], pair.group2[k])) {
+                    if(_isColliding(pair.group1[j], pair.group2[k])) {
                         if(pair.group1[j].onCollision !== undefined) {
                             pair.group1[j].onCollision(pair.group2[k]);
                         }
@@ -94,7 +93,7 @@
 
         for(var j in group1) {
             for (var k in group2) {
-                if(isColliding(group1[j], group2[k])) {
+                if(_isColliding(group1[j], group2[k])) {
                     return true;
                 }
             }
@@ -103,7 +102,7 @@
         return false;
     }
 
-    function isColliding (objA, objB) {
+    function _isColliding (objA, objB) {
 
         if (objA._objID === objB._objID
             || (objA.x + objA.width) < objB.x

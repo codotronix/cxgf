@@ -31,12 +31,37 @@
                     <label>gameObjectConfig</label>
                     <ol>
                         <li><b>x</b>: &lt;Number&gt; X Coordinate</li>
+
                         <li><b>y</b>: &lt;Number&gt; Y Coordinate</li>
+
                         <li><b>speed</b>: &lt;Number&gt; Defaults to 1</li>
+                        
                         <li><b>speedX</b>: &lt;Number&gt; Defaults to speed</li>
+                        
                         <li><b>speedY</b>: &lt;Number&gt; Defaults to speed</li>
+                        
                         <li><b>htmlId</b>: ID of HTML DOM element that represents this object</li>
+                        
+                        <li><b>gravityOn</b>: true / false to turn gravity ON / OFF on this object</li>
+                        
                         <li><b>holdDirectionNTurns</b>: Used for random moves only. It indicates how many turns or ticks to wait before randomizing the direction again. Defaults to 10</li>
+
+                        <li>
+                            <b>onCollision (collidingGameObject)</b>: &lt;Function&gt;
+                            if this gameObject is added to <b>cxgf.Collision.watch</b> list, then whenever a collision is detected, this <b>onCollision</b> function will be called with the <b>collidingGameObject</b> as its parameter
+                        </li>
+
+                        <li><b>type</b>: &lt;string&gt; 
+                            A string specifying the meaning / type / category of this object. For example, if it is a game of "cats" and "mice", we can give all the cat objects a <pre>type: cat</pre> and each mouse objects a <pre>type: mouse</pre>, so that, later we can easily get all the same type of objects by one simple query like,
+<pre>
+    cxgf.GameObject.getAll({
+        type: "car"
+    })
+</pre>
+                            <br>
+                            see <b>cxgf.GameObject.getAll(identifier: JSON)</b> next for more details
+
+                        </li>
                     </ol>
                 </td>
             </tr>

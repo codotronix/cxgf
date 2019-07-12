@@ -45,7 +45,7 @@
 
     /*
     * Add callback function to Ticker
-    * skipTick: number of ticks to skip before the function is called again
+    * skipTick or tickInterval: number of ticks to skip before the function is called again
     */
     function onTick (callbackFn, obj, skipTick) {
         var tickListenerID = cxgf.Utils.generateID('ticker');
@@ -57,7 +57,7 @@
         });
 
         //start the tick
-        startTick();
+        //startTick();
 
         return tickListenerID;
     }
@@ -130,7 +130,47 @@
             "UP": 38,
             "RIGHT": 39,
             "DOWN": 40,
-            "SPACE": 32
+            "SPACE": 32,
+            "TAB": 9,
+            "SHIFT": 16,
+            "CTRL": 17,
+            "ALT": 18,
+            "A": 65,
+            "B": 66,
+            "C": 67,
+            "D": 68,
+            "E": 69,
+            "F": 70,
+            "G": 71,
+            "H": 72,
+            "I": 73,
+            "J": 74,
+            "K": 75,
+            "L": 76,
+            "M": 77,
+            "N": 78,
+            "O": 79,
+            "P": 80,
+            "Q": 81,
+            "R": 82,
+            "S": 83,
+            "T": 84,
+            "U": 85,
+            "V": 86,
+            "W": 87,
+            "X": 88,
+            "Y": 89,
+            "Z": 90,
+            "ONE": 49,
+            "TWO": 50,
+            "THREE": 51,
+            "FOUR": 52,
+            "FIVE": 53,
+            "SIX": 54,
+            "SEVEN": 55,
+            "EIGHT": 56,
+            "NINE": 57,
+            "ZERO": 48
         }
     };
 
@@ -173,8 +213,7 @@
 
     window.cxgf.Collision = {
         watch: watchCollision,
-        isColliding: isColliding,
-        isCollidingGroup: isCollidingGroup
+        isColliding: isCollidingGroup
     };
 
     /*
@@ -243,7 +282,7 @@
             
             for(var j in pair.group1) {
                 for (var k in pair.group2) {
-                    if(isColliding(pair.group1[j], pair.group2[k])) {
+                    if(_isColliding(pair.group1[j], pair.group2[k])) {
                         if(pair.group1[j].onCollision !== undefined) {
                             pair.group1[j].onCollision(pair.group2[k]);
                         }
@@ -265,7 +304,7 @@
 
         for(var j in group1) {
             for (var k in group2) {
-                if(isColliding(group1[j], group2[k])) {
+                if(_isColliding(group1[j], group2[k])) {
                     return true;
                 }
             }
@@ -274,7 +313,7 @@
         return false;
     }
 
-    function isColliding (objA, objB) {
+    function _isColliding (objA, objB) {
 
         if (objA._objID === objB._objID
             || (objA.x + objA.width) < objB.x
@@ -398,7 +437,7 @@
         this.speed = this.speed || 1;
         this.speedX = this.speedX || this.speed;
         this.speedY = this.speedY || this.speed;
-        this.directionSense = this.directionSense || 4;
+        //this.directionSense = this.directionSense || 4;
         this.holdDirectionNTurns = this.holdDirectionNTurns || 9;
         this.gravityOn = this.gravityOn || false;
         this.weight = this.weight || 1;             //100 is immovable object

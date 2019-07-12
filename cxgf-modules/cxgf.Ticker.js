@@ -15,7 +15,7 @@
 
     /*
     * Add callback function to Ticker
-    * skipTick: number of ticks to skip before the function is called again
+    * skipTick or tickInterval: number of ticks to skip before the function is called again
     */
     function onTick (callbackFn, obj, skipTick) {
         var tickListenerID = cxgf.Utils.generateID('ticker');
@@ -27,7 +27,7 @@
         });
 
         //start the tick
-        startTick();
+        //startTick();
 
         return tickListenerID;
     }

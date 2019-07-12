@@ -104,7 +104,7 @@
         this.speed = this.speed || 1;
         this.speedX = this.speedX || this.speed;
         this.speedY = this.speedY || this.speed;
-        this.directionSense = this.directionSense || 4;
+        //this.directionSense = this.directionSense || 4;
         this.holdDirectionNTurns = this.holdDirectionNTurns || 9;
         this.gravityOn = this.gravityOn || false;
         this.weight = this.weight || 1;             //100 is immovable object
