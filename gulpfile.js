@@ -52,6 +52,9 @@ gulp.task('concatScripts', function() {
 
 
 // create a default task and just log a message
-gulp.task('default', ['concatScripts'], function () {
+// gulp.task('default', ['concatScripts'], function () {
+//     console.log("Gulping Done...");
+// });
+gulp.task('default', gulp.series('concatScripts', function () {
     console.log("Gulping Done...");
-});
+}));
