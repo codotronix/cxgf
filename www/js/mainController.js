@@ -17,11 +17,11 @@
                 pageID: "homepage",
                 url: "/home"
             },
-            {
-                text: "See it in Action",
-                pageID: "seeinactionpage",
-                url: "/see-it-in-action"
-            },
+            // {
+            //     text: "See it in Action",
+            //     pageID: "seeinactionpage",
+            //     url: "/see-it-in-action"
+            // },
             {
                 text: "Demos",
                 pageID: "demopage",
