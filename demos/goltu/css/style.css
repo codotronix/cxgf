@@ -1,0 +1,142 @@
+html, body {
+	position: static;
+}
+
+* {
+	display: block;
+	box-sizing: border-box;
+	position: absolute;
+}
+
+g-world {	
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;	
+}
+
+g-sky {
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: skyblue;
+    background: linear-gradient(skyblue, skyblue, white, white);
+    overflow: hidden;
+}
+
+g-cloud {	
+	width: 100%;	
+}
+
+.cloud-row-1 {
+	top: 5px;
+	height: 50px;
+	background: url('../img/bgc4.png') 300px 0px repeat;
+	-webkit-animation: cloud1Move 20s linear 0s infinite normal;
+	animation: cloud1Move 20s linear 0s infinite normal;
+}
+
+.cloud-row-2 {
+	top: 30px;
+	height: 100px;
+	background: url('../img/bgc3.png') 0px 0px repeat;
+	-webkit-animation: cloud2Move 80s linear 0s infinite normal;
+	animation: cloud2Move 80s linear 0s infinite normal;
+}
+
+.cloud-row-3 {
+	top: 100px;
+}
+
+.control-notify {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, .2);
+	text-align: center;
+	padding: 5px;
+	font-size: 16px; 
+	color: #fff;
+	z-index: 9999;
+}
+
+@keyframes cloud1Move {
+    from { background-position: 0px 0px; }
+    to { background-position: -509px 0px; }
+}
+
+@-webkit-keyframes cloud1Move {
+    from { background-position: 0px 0px; }
+    to { background-position: -509px 0px; }
+}
+
+@keyframes cloud2Move {
+    from { background-position: 0px 0px; }
+    to { background-position: -1183px 0px; }
+}
+
+@-webkit-keyframes cloud2Move {
+    from { background-position: 0px 0px; }
+    to { background-position: -1183px 0px; }
+}
+
+g-ground {
+	bottom: 0;
+	width: 100%;
+}
+
+g-goltu {
+	left: 20%;
+	top: -105px;
+	height: 83px;
+	width: 60px;
+	background: url('../img/goltu_run.png') -120px 0px no-repeat;
+	z-index: 99999;
+}
+
+g-road {
+	top: -50px;
+	width: 100%;
+	height: 50px;
+	background: url('../img/r1.png') repeat;	
+}
+
+/*
+g-ground.moving g-road {
+	animation: roadMove 2s linear 0s infinite normal;
+}
+*/
+
+g-goltu.seated {
+	background-position: -300px 0px;
+}
+
+g-goltu.jumping {
+	background-position: 0px 0px;
+}
+
+g-goltu.running {
+	-webkit-animation: gol2Run .2s steps(5) infinite alternate;
+	animation: gol2Run .2s steps(5) infinite alternate;
+}
+
+@keyframes roadMove {
+    from { background-position: 0px 0px; }
+    to { background-position: -238px 0px; }
+}
+
+@-webkit-keyframes roadMove {
+    from { background-position: 0px 0px; }
+    to { background-position: -238px 0px; }
+}
+
+@keyframes gol2Run {
+  from { background-position: 0px; }
+  to { background-position: -300px; }
+}
+
+@-webkit-keyframes gol2Run {
+  from { background-position: 0px; }
+  to { background-position: -300px; }
+}

@@ -25,7 +25,7 @@
         	},
         	{
         		name: "Go Gol2, Go",
-				url: "http://barick.in/Dourio/Final/",
+				url: "demos/goltu/index.html",
 				img: "www/img/go-gol2-go/go-gol2-go.png",
 				desc: "Little Gol2 must run for his life to save himself from VouVou"
         	},
